@@ -14,6 +14,14 @@ node {
         app = docker.build("sanrys/cube2")
     }
 
+    stage('Twistlock Scan') {
+        twistlockScan ca: '', cert: '', compliancePolicy: 'warn', dockerAddress: 'unix:///var/run/docker.sock', gracePeriodDays: 0, ignoreImageBuildTime: false, image: 'sanrys/cube2:latest', key: '', logLevel: 'true', policy: 'warn', requirePackageUpdate: false, timeout: 10
+    }
+    
+    stage('Twistlock Publish') {
+        twistlockPublish ca: '', cert: '', dockerAddress: 'unix:///var/run/docker.sock', image: 'sanrys/cube2:latest', key: '', logLevel: 'true', timeout: 10
+    } 
+    
     stage('Test image') {
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
@@ -23,13 +31,6 @@ node {
         }
     }
   
-      stage('Twistlock Scan') {
-        twistlockScan ca: '', cert: '', compliancePolicy: 'warn', dockerAddress: 'unix:///var/run/docker.sock', gracePeriodDays: 0, ignoreImageBuildTime: false, image: 'sanrys/cube2:latest', key: '', logLevel: 'true', policy: 'warn', requirePackageUpdate: false, timeout: 10
-    }
-    
-    stage('Twistlock Publish') {
-        twistlockPublish ca: '', cert: '', dockerAddress: 'unix:///var/run/docker.sock', image: 'sanrys/cube2:latest', key: '', logLevel: 'true', timeout: 10
-    }
     stage('Push image') {
         /* Finally, we'll push the image with two tags:
          * First, the incremental build number from Jenkins
