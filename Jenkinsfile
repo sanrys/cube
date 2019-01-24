@@ -15,6 +15,7 @@ node {
     }
 
     stage('Twistlock Scan') {
+        sh 'docker images'
         twistlockScan ca: '', cert: '', compliancePolicy: 'warn', dockerAddress: 'unix:///var/run/docker.sock', gracePeriodDays: 0, ignoreImageBuildTime: false, image: 'sanrys/cube2:latest', key: '', logLevel: 'true', policy: 'warn', requirePackageUpdate: false, timeout: 10
     }
     
