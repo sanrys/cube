@@ -11,18 +11,10 @@ node {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
 
-        app = docker.build("sanrys/cube2")
+        app = docker.build("nehag/cube2")
     }
 
-    stage('Twistlock Scan') {
-        sh 'docker images'
-        twistlockScan ca: '', cert: '', compliancePolicy: 'warn', dockerAddress: 'unix:///var/run/docker.sock', gracePeriodDays: 0, ignoreImageBuildTime: true, image: 'sanrys/cube2:latest', key: '', logLevel: 'true', policy: 'warn', requirePackageUpdate: false, timeout: 10
-    }
-    
-    stage('Twistlock Publish') {
-        twistlockPublish ca: '', cert: '', ignoreImageBuildTime: true, dockerAddress: 'unix:///var/run/docker.sock', image: 'sanrys/cube2:latest', key: '', logLevel: 'true', timeout: 10
-    } 
-    
+     
     stage('Test image') {
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
