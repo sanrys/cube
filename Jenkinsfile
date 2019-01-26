@@ -13,7 +13,10 @@ node {
 
         app = docker.build("nehag/cube2")
     }
-
+    
+    stage('Scan image') {
+        aqua hideBase: false, hostedImage: '', localImage: 'sanrys/cube2', locationType: 'local', notCompliesCmd: '', onDisallowed: 'ignore', policies: '', register: true, registry: '', showNegligible: false
+    }
      
     stage('Test image') {
         /* Ideally, we would run a test framework against our image.
