@@ -15,7 +15,7 @@ node {
     }
     
     stage('Scan image') {
-       twistlockScan ca: '', cert: '', compliancePolicy: 'medium', dockerAddress: 'unix:///var/run/docker.sock', gracePeriodDays: 0, ignoreImageBuildTime: true, image: 'sanrys/cube2', key: '', logLevel: 'true', policy: 'medium', requirePackageUpdate: false, timeout: 10
+       twistlockScan ca: '', cert: '', compliancePolicy: 'critical', dockerAddress: 'unix:///var/run/docker.sock', gracePeriodDays: 0, ignoreImageBuildTime: true, image: 'sanrys/cube2', key: '', logLevel: 'true', policy: 'critical', requirePackageUpdate: false, timeout: 10
     }
     
     stage('Twistlock Publish') {
