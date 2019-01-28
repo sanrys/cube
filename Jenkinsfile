@@ -17,6 +17,11 @@ node {
     stage('Scan image') {
        twistlockScan ca: '', cert: '', compliancePolicy: 'medium', dockerAddress: 'unix:///var/run/docker.sock', gracePeriodDays: 0, ignoreImageBuildTime: true, image: 'sanrys/cube2', key: '', logLevel: 'true', policy: 'medium', requirePackageUpdate: false, timeout: 10
     }
+    
+    stage('Twistlock Publish') {
+        twistlockPublish ca: '', cert: '', ignoreImageBuildTime: true, dockerAddress: 'unix:///var/run/docker.sock', image: 'sanrys/cube2:latest', key: '', logLevel: 'true', timeout: 10
+    } 
+
      
     stage('Test image') {
         /* Ideally, we would run a test framework against our image.
