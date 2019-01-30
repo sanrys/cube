@@ -15,7 +15,7 @@ node {
     }
     
     stage('Scan image') {
-       aqua hideBase: false, hostedImage: '', localImage: 'nehag/cube2', locationType: 'local', notCompliesCmd: '', onDisallowed: 'ignore', policies: '', register: true, registry: 'nehaNBC', showNegligible: false
+       aqua hideBase: false, hostedImage: '', localImage: 'nehag/cube2', locationType: 'local', notCompliesCmd: '', onDisallowed: 'fail', policies: '', register: true, registry: 'nehaNBC', showNegligible: false
     }
      
     stage('Test image') {
